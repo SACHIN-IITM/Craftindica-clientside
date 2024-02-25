@@ -29,15 +29,12 @@ const App = () => {
     localStorage.removeItem('authenticated');
   };
 
-  // Global error handler for API calls
   const handleApiError = (error) => {
     if (error.response && error.response.status === 401) {
-      // Redirect to login if the API call returns unauthorized (401)
       setAuthenticated(false);
       localStorage.removeItem('authenticated');
       return <Navigate to="/" />;
     }
-    // Handle other errors as needed
     console.error('API error:', error);
     return null;
   };
