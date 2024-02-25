@@ -11,8 +11,8 @@ export default function DashBoard({ onLogout }) {
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        onLogout(); // Call the provided logout function
-        navigate('/'); // Navigate to the home page
+        onLogout(); 
+        navigate('/'); 
     };
 
     return (
