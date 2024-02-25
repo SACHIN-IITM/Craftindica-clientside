@@ -5,7 +5,7 @@ const EmployeeList = () => {
     const [employeeData, setEmployeeData] = useState([]);
 
     useEffect(() => {
-        fetch('https://craftindica-serverside.onrender.com/api/employees')
+        fetch('http://localhost:3000/api/employees')
             .then(response => response.json())
             .then(data => setEmployeeData(data))
             .catch(error => console.error('Error fetching employee data:', error));
