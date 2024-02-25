@@ -27,7 +27,7 @@ const NewEmployeeRecordForm = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:3000/api/add-record', {
+            const response = await fetch('https://craftindica-serverside.onrender.com/api/add-record', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ const NewEmployeeRecordForm = () => {
 
             if (response.ok) {
                 console.log('Record added successfully');
-                navigate('/');  // Redirect to the root page
+                navigate('/');  
             } else {
                 console.error('Failed to add record');
             }
