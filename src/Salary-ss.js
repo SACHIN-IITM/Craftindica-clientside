@@ -7,7 +7,7 @@ const SalaryStatistics = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch('http://localhost:3000/api/salary-statistics')
+        fetch('https://craftindica-serverside.onrender.com/api/salary-statistics')
             .then(response => response.json())
             .then(data => {
                 setStatistics(data);
