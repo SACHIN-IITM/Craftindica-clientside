@@ -23,7 +23,6 @@ const EmployeeList = () => {
             const data = await response.json();
 
             if (response.ok) {
-                // Update employeeData state after successful deletion
                 setEmployeeData(prevData => prevData.filter(employee => employee.id !== id));
                 console.log(data.message);
             } else {
