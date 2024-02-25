@@ -1,25 +1,73 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import NewEmployeeRecordForm from './NewForm';
+import DepartmentSalarySummary from './Departmental-ss';
+import DetailedDepartmentSalarySummary from './Detailed-Departmental-ss';
+import Login from './Login';
+import DashBoard from './DashBoard';
+import SalaryStatistics from './Salary-ss';
+import ContractSalarySummary from './Contract-ss';
+import "./App.css";
 
-function App() {
+const App = () => {
+  const [authenticated, setAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const storedAuth = localStorage.getItem('authenticated');
+    if (storedAuth === 'true') {
+      setAuthenticated(true);
+    }
+  }, []);
+
+  const handleLogin = () => {
+    setAuthenticated(true);
+    localStorage.setItem('authenticated', 'true');
+  };
+
+  const handleLogout = () => {
+    setAuthenticated(false);
+    localStorage.removeItem('authenticated');
+  };
+
+  // Global error handler for API calls
+  const handleApiError = (error) => {
+    if (error.response && error.response.status === 401) {
+      // Redirect to login if the API call returns unauthorized (401)
+      setAuthenticated(false);
+      localStorage.removeItem('authenticated');
+      return <Navigate to="/" />;
+    }
+    // Handle other errors as needed
+    console.error('API error:', error);
+    return null;
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            authenticated ? (
+              <Navigate to="/dashboard" />
+            ) : (
+              <Login onLogin={handleLogin} />
+            )
+          }
+        />
+        {authenticated && (
+          <>
+            <Route path="/dashboard" element={<DashBoard onLogout={handleLogout} />} />
+            <Route path="/salary-summary" element={<SalaryStatistics onError={handleApiError} />} />
+            <Route path="/add-record" element={<NewEmployeeRecordForm onError={handleApiError} />} />
+            <Route path="/contract-based-salary-summary" element={<ContractSalarySummary onError={handleApiError} />} />
+            <Route path="/department-salary-summary" element={<DepartmentSalarySummary onError={handleApiError} />} />
+            <Route path="/detailed-department-salary-summary" element={<DetailedDepartmentSalarySummary onError={handleApiError} />} />
+          </>
+        )}
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
