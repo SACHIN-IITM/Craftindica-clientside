@@ -10,7 +10,7 @@ const DetailedDepartmentSalarySummary = () => {
     useEffect(() => {
         const fetchDetailedDepartmentSalarySummary = async () => {
             try {
-                const response = await fetch('http://localhost:3000/api/detailed-department-salary-summary');
+                const response = await fetch('https://craftindica-serverside.onrender.com/api/detailed-department-salary-summary');
                 if (!response.ok) {
                     throw new Error('Failed to fetch detailed departmental salary summary');
                 }
