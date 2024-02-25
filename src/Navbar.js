@@ -48,7 +48,7 @@ const Navbar = ({ handleLogout }) => {
     if (page === '/') {
       window.location.href = 'http://localhost:3001/';
     } else if (page === '/logout') {
-      handleLogout(); // Call the handleLogout function provided as a prop
+      handleLogout(); 
     } else {
       navigate(page);
     }
