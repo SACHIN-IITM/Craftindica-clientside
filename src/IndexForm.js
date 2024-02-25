@@ -5,7 +5,7 @@ const EmployeeList = () => {
     const [employeeData, setEmployeeData] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:3000/api/employees')
+        fetch('https://craftindica-serverside.onrender.com/api/employees')
             .then(response => response.json())
             .then(data => setEmployeeData(data))
             .catch(error => console.error('Error fetching employee data:', error));
@@ -13,7 +13,7 @@ const EmployeeList = () => {
 
     const handleDelete = async (id) => {
         try {
-            const response = await fetch(`http://localhost:3000/api/delete-record/${id}`, {
+            const response = await fetch(`https://craftindica-serverside.onrender.com/api/delete-record/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
