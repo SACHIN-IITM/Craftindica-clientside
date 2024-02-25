@@ -10,7 +10,7 @@ const ContractSalarySummary = () => {
     useEffect(() => {
         const fetchContractSalarySummary = async () => {
             try {
-                const response = await fetch('http://localhost:3000/api/contract-salary-summary');
+                const response = await fetch('https://craftindica-serverside.onrender.com/api/contract-salary-summary');
                 if (!response.ok) {
                     throw new Error('Failed to fetch contract salary summary');
                 }
